@@ -1,6 +1,7 @@
 public class Acorazado extends Barco {
     public Acorazado() { super(4); }
-
+//Override
+    
     @Override
     public boolean ataqueEspecial(Coordenada coord) {
         int f = coord.getFila();
