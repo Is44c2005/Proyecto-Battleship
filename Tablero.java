@@ -34,6 +34,29 @@ public class Tablero {
     }
 
     public boolean validarColocacion(Barco barco, List<Coordenada> posiciones) {
-        return posiciones.size() == barco.getLongitud();
+        if (posiciones.size() != barco.getLongitud()) {
+            return false;
+        }
+        for (Coordenada coord : posiciones) {
+            Casilla casilla = grilla.get(coord.getFila()).get(coord.getColumna());
+            if (casilla.getEstado() != Estado.VACIA) {
+                return false;
+            }
+        }
+        return true;
     }
+
+    public boolean estaDentroDelTablero(Coordenada coord) {
+        return coord.getFila() >= 0 && coord.getFila() < grilla.size()
+                && coord.getColumna() >= 0 && coord.getColumna() < grilla.get(0).size();
+    }
+
+    public boolean estaOcupada(Coordenada coord) {
+        return grilla.get(coord.getFila()).get(coord.getColumna()).getEstado() == Estado.OCUPADA;
+    }
+
+    public void ocuparCasilla(Coordenada coord) {
+        grilla.get(coord.getFila()).get(coord.getColumna()).cambiarEstado(Estado.OCUPADA);
+    }
+
 }
